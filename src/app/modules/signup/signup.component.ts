@@ -2,12 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/core/authentication/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Login } from 'src/app/shared/models/login';
+import {NewAccount} from 'src/app/shared/models/new-account';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationService } from 'src/app/core/services/validation.service';
 import { IdNamePair } from 'src/app/shared/models/id-name-pair';
 import { ApiService } from 'src/app/core/services/api.service';
 import { Library } from 'src/app/core/library';
+import { RegisterUser } from 'src/app/shared/models/RegisterData';
 
 @Component({
   selector: 'app-signup',
@@ -16,13 +18,16 @@ import { Library } from 'src/app/core/library';
 })
 export class SignupComponent implements OnInit {
 
-  @Input() redirectTo:String = 'account';
+  @Input() redirectTo: String = 'account';
 
-  account:Login = <Login>{};
+  account: Login = <Login>{};
   accountForm: FormGroup;
 
   selectedCountry: IdNamePair;
   countries: IdNamePair[];
+
+  register = new NewAccount();
+
 
   constructor(public http: HttpClient, private authService: AuthService, private apiService: ApiService,
     private router: Router, private route : ActivatedRoute, private builder: FormBuilder) { }
@@ -30,13 +35,13 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
 
     this.accountForm = this.builder.group({
-      'name': ['', [Validators.required]],
-      'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'address': ['', [Validators.required]],
-      'city': ['', [Validators.required]],
-      'postal': ['', [Validators.required]],
-      'newPassword': ['', [Validators.required, ValidationService.passwordValidator]],
-      'confirmPassword': ['', [Validators.required, ValidationService.passwordValidator]]},
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, ValidationService.emailValidator]],
+      address: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      postal: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, ValidationService.passwordValidator]],
+      confirmPassword: ['', [Validators.required, ValidationService.passwordValidator]]},
       {validator: ValidationService.matchingPasswords('newPassword', 'confirmPassword')}
     );
 
@@ -51,7 +56,16 @@ export class SignupComponent implements OnInit {
 
   login() {
 
-    this.authService.login(this.account.username, this.account.password, '/home');
+    this.authService.login(this.account.username, this.account.password, 'account');
+  }
+
+  signup(user: RegisterUser, redirect: string) {
+    console.log(user);
+    this.register.name = user.name;
+    this.register.password = user.confirmPassword;
+    this.register.email = user.email;
+    console.log(this.register);
+    this.authService.signup(this.register, redirect);
   }
 
 }

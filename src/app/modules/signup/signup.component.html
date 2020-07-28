@@ -22,7 +22,7 @@
           </div>
         </tab>
         <tab heading="Sign Up">
-          <form class="regForm" [formGroup]="accountForm" (ngSubmit)='signup(accountForm.value)'>
+          <form class="regForm" [formGroup]="accountForm" (ngSubmit)="signup(accountForm.value, 'home')">
             <div class="container my-5">
               <div class="row justify-content-center">
 
@@ -31,37 +31,37 @@
                       <div class="form-group">
                           <label>First Name, Last Name</label>
                           <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.name"></control-messages>
-                          <input name="name" ngControl='name' #name formControlName="name" title="First Name, Last Name" type="text"
+                          <input name="name" ngControl="name" #name formControlName="name" title="First Name, Last Name" type="text"
                                 class="form-control" placeholder="First Name, Last Name" required>
                       </div>
                       <div class="form-group required">
                         <label>Email</label>
                         <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.email"></control-messages>
-                        <input name="email" ngControl='email' #email formControlName="email" type="email"
+                        <input name="email" ngControl="email" #email formControlName="email" type="email"
                               class="form-control" placeholder="Email" required>
                       </div>
                       <div class="form-group required">
                         <label>Password</label>
                         <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.newPassword"></control-messages>         
-                        <input name="newPassword" ngControl='newPassword' #newassword formControlName="newPassword"
+                        <input name="newPassword" ngControl="newPassword" #newpassword formControlName="newPassword"
                               title="Password" type="password" autocomplete="foo" 
                               class="form-control" placeholder="Password" required>
                       </div>
                       <div class="form-group required">
                           <label>Confirm Password</label>
                           <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.confirmPassword"></control-messages>           
-                          <input name="confirmPassword" ngControl='confirmPassword' #confirmPassword formControlName="confirmPassword"
+                          <input name="confirmPassword" ngControl="confirmPassword" #confirmPassword formControlName="confirmPassword"
                                 title="Confirm Password" type="password" autocomplete="foo" 
                                 class="form-control" placeholder="Confirm Password" required>
                       </div>
                       <div class="form-group">
                           <label>Phone</label>
-                          <input name="phone" ngControl='phone'  title="Phone" type="text"
+                          <input name="phone" ngControl="phone"  title="Phone" type="text"
                                 class="form-control" placeholder="Phone">
                       </div>
                       <div class="form-group">
                           <label>Fax</label>
-                          <input name="fax" ngControl='fax'  title="Fax" type="text"
+                          <input name="fax" ngControl="fax"  title="Fax" type="text"
                                 class="form-control" placeholder="Fax">
                       </div>
                   </div>
@@ -70,7 +70,7 @@
                       <div class="form-group">
                           <label>Address</label>
                           <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.address"></control-messages>
-                          <input name="address" ngControl='address' #address formControlName="address" title="Address" type="text"
+                          <input name="address" ngControl="address" #address formControlName="address" title="Address" type="text"
                                 class="form-control" placeholder="Address" required>
                       </div>
                       <div class="form-group">
@@ -81,13 +81,13 @@
                       <div class="form-group">
                           <label>City</label>
                           <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.city"></control-messages>
-                          <input name="city" ngControl='city' #city formControlName="city" title="City" type="text"
+                          <input name="city" ngControl="city" #city formControlName="city" title="City" type="text"
                                 class="form-control" placeholder="City" required>
                       </div>
                       <div class="form-group">
                           <label>Postal</label>
                           <control-messages *ngIf="accountForm.controls" [control]="accountForm.controls.postal"></control-messages>
-                          <input name="postal" ngControl='postal' #postal formControlName="postal" title="Postal" type="text"
+                          <input name="postal" ngControl="postal" #postal formControlName="postal" title="Postal" type="text"
                                 class="form-control" placeholder="Postal" required>
                       </div>
                       <div class="form-group">
